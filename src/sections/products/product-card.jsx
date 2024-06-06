@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
 import { fCurrency } from 'src/utils/format-number';
-
 import Label from 'src/components/label';
 import { ColorPreview } from 'src/components/color-utils';
+import { Link as RouterLink } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -63,10 +61,9 @@ export default function ShopProductCard({ product }) {
   );
 
   return (
-    <Card>
+    <Card component={RouterLink} to={`/products/${product.id}`} sx={{ textDecoration: 'none' }}>
       <Box sx={{ pt: '100%', position: 'relative' }}>
         {product.status && renderStatus}
-
         {renderImg}
       </Box>
 

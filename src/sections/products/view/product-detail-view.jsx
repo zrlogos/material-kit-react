@@ -1,6 +1,8 @@
-import { useParams } from 'react-router-dom';
-import { Container, Box, Typography, Button, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { Box, Grid, Button, Container, Typography } from '@mui/material';
+
 import { products } from 'src/_mock/products';
 
 // ----------------------------------------------------------------------

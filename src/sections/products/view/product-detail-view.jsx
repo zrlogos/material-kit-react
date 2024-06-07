@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { Box, Grid, Button, Container, Typography } from '@mui/material';
 
@@ -10,6 +10,7 @@ import { products } from 'src/_mock/products';
 export default function ProductDetailView() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const foundProduct = products.find((p) => p.id === productId);
@@ -22,6 +23,9 @@ export default function ProductDetailView() {
 
   return (
     <Container>
+      <Button variant="contained" onClick={() => navigate('/products')} sx={{ mb: 3 }}>
+        Back to Products
+      </Button>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <Box
@@ -59,7 +63,9 @@ export default function ProductDetailView() {
           <Button variant="contained" sx={{ mr: 2 }}>
             Add to Cart
           </Button>
-          <Button variant="outlined">Buy Now</Button>
+          <Button variant="outlined" onClick={() => navigate('/checkout')}>
+            Buy Now
+          </Button>
         </Grid>
       </Grid>
     </Container>

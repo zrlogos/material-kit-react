@@ -8,10 +8,12 @@ import { alpha } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import useAccountStore from '../../../stores/accountStore';
 
-import { account } from 'src/_mock/account';
 
 // ----------------------------------------------------------------------
+
+
 
 const MENU_OPTIONS = [
   {
@@ -31,6 +33,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const account = useAccountStore((state) => state.account);
   const [open, setOpen] = useState(null);
 
   const handleOpen = (event) => {

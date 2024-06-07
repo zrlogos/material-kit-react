@@ -16,10 +16,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useRouter } from 'src/routes/hooks';
 
 import { bgGradient } from 'src/theme/css';
-
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
-import { login } from 'src/_mock/account';
+import useAccountStore from 'src/stores/accountStore'; // 导入 useAccountStore
 // ----------------------------------------------------------------------
 
 export default function LoginView() {
@@ -30,14 +29,29 @@ export default function LoginView() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  const setAccount = useAccountStore(state => state.setAccount); // 获取 setAccount 方法
+
   const handleClick = () => {
-    if (login(email, password)) {
-      router.push('/dashboard');
+    // 从 localStorage 中获取用户信息
+    const storedUserInfo = localStorage.getItem(email);
+    if (storedUserInfo) {
+      const userInfo = JSON.parse(storedUserInfo);
+      // 检查存储的密码是否与输入的密码匹配
+      if (userInfo.password === password) {
+        const account = {
+          displayName: userInfo.name,
+          email: userInfo.email,
+          photoURL: '/assets/images/avatars/avatar_25.jpg',
+        };
+        setAccount(account); // 更新 account 的状态
+        router.push('/dashboard');
+      } else {
+        alert('Invalid email or password');
+      }
     } else {
       alert('Invalid email or password');
     }
   };
-
   const renderForm = (
     <>
       <Stack spacing={3}>
@@ -111,11 +125,14 @@ export default function LoginView() {
         >
           <Typography variant="h4">Sign in to Minimal</Typography>
 
+
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Don’t have an account?
-            <Link variant="subtitle2" sx={{ ml: 0.5 }}>
+
+            <Link href ='/register' variant="subtitle2" sx={{ ml: 0.5 }}>
               Get started
             </Link>
+
           </Typography>
 
           <Stack direction="row" spacing={2}>

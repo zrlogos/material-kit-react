@@ -15,17 +15,20 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { account } from 'src/_mock/account';
+
 
 import Logo from 'src/components/logo';
 import Scrollbar from 'src/components/scrollbar';
 
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';
+import useAccountStore from '../../stores/accountStore';
 
 // ----------------------------------------------------------------------
 
 export default function Nav({ openNav, onCloseNav }) {
+
+  const account = useAccountStore((state) => state.account);
   const pathname = usePathname();
 
   const upLg = useResponsive('up', 'lg');

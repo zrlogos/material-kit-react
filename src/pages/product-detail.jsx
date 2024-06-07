@@ -11,7 +11,6 @@ export default function ProductDetailPage() {
       <Helmet>
         <title>Product Detail | Minimal UI</title>
       </Helmet>
-
       <ProductDetailView />
     </>
   );

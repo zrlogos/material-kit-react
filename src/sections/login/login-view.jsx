@@ -19,29 +19,39 @@ import { bgGradient } from 'src/theme/css';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
-
+import { login } from 'src/_mock/account';
 // ----------------------------------------------------------------------
 
 export default function LoginView() {
   const theme = useTheme();
 
   const router = useRouter();
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
-    router.push('/dashboard');
+    if (login(email, password)) {
+      router.push('/dashboard');
+    } else {
+      alert('Invalid email or password');
+    }
   };
 
   const renderForm = (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField
+          name="email"
+          label="Email address"
+          onChange={e => setEmail(e.target.value)} // 添加这行
+        />
 
         <TextField
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
+          onChange={e => setPassword(e.target.value)} // 添加这行
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">

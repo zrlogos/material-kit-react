@@ -24,7 +24,7 @@ export default function ProductDetailView() {
   return (
     <Container>
       <Button variant="contained" onClick={() => navigate('/products')} sx={{ mb: 3 }}>
-        Back to Products
+        Back to Products Page
       </Button>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>

@@ -15,6 +15,10 @@ export const Page404 = lazy(() => import('src/pages/page-not-found'));
 export default function Router() {
   const routes = useRoutes([
     {
+      path: '/',
+      element: <LoginPage />,
+    },
+    {
       element: (
         <DashboardLayout>
           <Suspense>
@@ -23,7 +27,7 @@ export default function Router() {
         </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
+        { path: 'dashboard', element: <IndexPage /> }, // 将dashboard路径单独列出
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'products/:productId', element: <ProductDetailPage /> },

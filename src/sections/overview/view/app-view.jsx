@@ -28,6 +28,21 @@ export default function AppView() {
         你好，欢迎回来👋
       </Typography>
 
+
+        <Grid xs={12} md={6} lg={4}>
+            <AppCarousel
+                title="今日热销"
+                subheader="当前热度top3商品"
+                items={[
+                    { image: '/assets/images/products/product_1.jpg', url: 'http://localhost:3030/products' },
+                    { image: '/assets/images/products/product_2.jpg', url: 'http://localhost:3030/products' },
+                    { image: '/assets/images/products/product_3.jpg', url: 'http://localhost:3030/products' },
+                ]}
+                autoPlayInterval={3000}
+            />
+
+        </Grid>
+
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
@@ -65,19 +80,7 @@ export default function AppView() {
           />
         </Grid>
 
-          <Grid xs={12} md={6} lg={4}>
-              <AppCarousel
-                  title="My Carousel"
-                  subheader="This is a carousel example"
-                  items={[
-                      { image: '/assets/images/products/product_1.jpg', url: 'http://localhost:3030/products' },
-                      { image: '/assets/images/products/product_2.jpg', url: 'http://localhost:3030/products' },
-                      { image: '/assets/images/products/product_3.jpg', url: 'http://localhost:3030/products' },
-                  ]}
-                  autoPlayInterval={3000}
-              />
 
-          </Grid>
 
           <Grid xs={12} md={6} lg={4}>
           <AppCurrentVisits

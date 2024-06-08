@@ -57,6 +57,7 @@ const NextButton = styled(ControlButton)({
 export default function AppCarousel({ title, subheader, items, autoPlayInterval }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    // eslint-disable-next-line consistent-return
     useEffect(() => {
         if (autoPlayInterval) {
             const interval = setInterval(() => {
@@ -80,7 +81,7 @@ export default function AppCarousel({ title, subheader, items, autoPlayInterval 
 
     return (
         <Card>
-            <CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} />
+            <CardHeader title={title} subheader={subheader} sx={{ mb: 1}} />
             <CarouselContainer>
                 <PrevButton onClick={handlePrev}>
                     <ArrowBackIosNewIcon />

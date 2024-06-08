@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,7 +10,7 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import Info from './Info';
 
-function InfoMobile({ totalPrice }) {
+function InfoMobile() {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -26,7 +25,7 @@ function InfoMobile({ totalPrice }) {
       >
         <CloseIcon />
       </IconButton>
-      <Info totalPrice={totalPrice} />
+      <Info/>
     </Box>
   );
 
@@ -46,8 +45,6 @@ function InfoMobile({ totalPrice }) {
   );
 }
 
-InfoMobile.propTypes = {
-  totalPrice: PropTypes.string.isRequired,
-};
+
 
 export default InfoMobile;

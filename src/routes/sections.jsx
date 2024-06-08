@@ -12,7 +12,6 @@ export const ProductsPage = lazy(() => import('src/pages/products'));
 export const CheckoutPage = lazy(() => import('src/pages/checkout'));
 export const ProductDetailPage = lazy(() => import('src/pages/product-detail'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
-export const CartPage = lazy(() => import('src/pages/cart'));
 export default function Router() {
   const routes = useRoutes([
     {
@@ -33,7 +32,7 @@ export default function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'products/:productId', element: <ProductDetailPage /> },
         { path: 'blog', element: <BlogPage /> },
-        { path: 'cart', element: <CartPage />},
+
         { path: 'checkout', element: <CheckoutPage /> },
       ],
     },

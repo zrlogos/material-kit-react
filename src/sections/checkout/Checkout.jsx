@@ -114,7 +114,7 @@ export default function Checkout() {
               maxWidth: 500,
             }}
           >
-            <Info totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} />
+            <Info/>
           </Box>
         </Grid>
         <Grid

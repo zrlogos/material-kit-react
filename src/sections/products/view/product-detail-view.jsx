@@ -21,6 +21,8 @@ import { RouterLink } from '../../../routes/components';
 import Logo from '../../../components/logo';
 import useCartStore from '../../../stores/cartStore';
 import CartWidget from '../product-cart-widget';
+import useCheckStore from '../../../stores/checkStore';
+import { useRouter } from '../../../routes/hooks';
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +38,8 @@ export default function ProductDetailView() {
   const [showAlert, setShowAlert] = useState(false);
   const [expanded, setExpanded] = useState(false); // 控制购买类型折叠面板的展开状态
   const [expandedParams, setExpandedParams] = useState(false);
-
+  const { addCheck } = useCheckStore();
+  const router = useRouter();
   useEffect(() => {
     const foundProduct = products.find((p) => p.id === productId);
     setProduct(foundProduct);
@@ -59,7 +62,14 @@ export default function ProductDetailView() {
       setShowAlert(true);
       setExpanded(true); // 展开购买类型选择界面
     } else {
-      navigate('/checkout', { state: { from: `/products/${productId}` } });
+
+      addCheck({
+        id: product.id,
+        name: product.name,
+        quantity: '1',
+        price: product.price,
+      });
+      router.push('/checkout');
     }
   };
 
@@ -82,20 +92,20 @@ export default function ProductDetailView() {
       <Logo />
     </Box>
   );
-  
+
   const { addToCart } = useCartStore();
   const handleAddToCart = () => {
-    const item ={
+    const item = {
       id: product.id,
       name: product.name,
       price: product.price,
       imageUrl: product.cover,
-      quantity: 1
-    }
+      quantity: 1,
+    };
     addToCart(item);
     cartWidgetRef.current.toggle();
-  
-  }
+
+  };
 
   if (!product) {
     return (

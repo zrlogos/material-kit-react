@@ -1,8 +1,4 @@
-import { styled } from '@mui/material/styles';
-
 import React from 'react';
-
-
 import {
   IconButton,
   Drawer,
@@ -15,37 +11,12 @@ import {
   Badge,
   Grid,
 } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import Iconify from '../../components/iconify';
 
-// ----------------------------------------------------------------------
-
-const StyledRoot = styled('div')(({ theme }) => ({
-  zIndex: 999,
-  right: 0,
-  display: 'flex',
-  cursor: 'pointer',
-  position: 'fixed',
-  alignItems: 'center',
-  top: theme.spacing(16),
-  height: theme.spacing(5),
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(2),
-  paddingTop: theme.spacing(1.25),
-  boxShadow: theme.customShadows.z20,
-  color: theme.palette.text.primary,
-  backgroundColor: theme.palette.background.paper,
-  borderTopLeftRadius: Number(theme.shape.borderRadius) * 2,
-  borderBottomLeftRadius: Number(theme.shape.borderRadius) * 2,
-  transition: theme.transitions.create('opacity'),
-  '&:hover': { opacity: 0.72 },
-}));
-
-// ----------------------------------------------------------------------
-
-export default function CartWidget() {
+const Cart = () => {
   const [cartOpen, setCartOpen] = React.useState(false);
   const [items, setItems] = React.useState([
     { id: 1, name: '商品 1', price: 100, quantity: 1, imageUrl: '/assets/images/products/product_1.jpg' },
@@ -69,13 +40,16 @@ export default function CartWidget() {
       item.id === id ? { ...item, quantity: Math.max(item.quantity + delta, 1) } : item,
     ));
   };
+
+
   return (
-    <>
-      <StyledRoot>
-        <Badge showZero badgeContent={2} color="error" max={99} onClick={toggleCart}>
-          <Iconify icon="eva:shopping-cart-fill" width={24} height={24} />
+    <div>
+
+      <IconButton color="inherit" onClick={toggleCart}>
+        <Badge badgeContent={items.length} color="secondary">
+          <ShoppingCartIcon />
         </Badge>
-      </StyledRoot>
+      </IconButton>
       <Drawer
         anchor="right"
         open={cartOpen}
@@ -122,7 +96,8 @@ export default function CartWidget() {
           结算
         </Button>
       </Drawer>
-    </>
-
+    </div>
   );
-}
+};
+
+export default Cart;

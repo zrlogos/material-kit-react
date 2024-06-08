@@ -14,20 +14,20 @@ import useAccountStore from '../../../stores/accountStore';
 // ----------------------------------------------------------------------
 
 
-
+/* 去掉了home 和 Settting 只保留profile */
 const MENU_OPTIONS = [
-  {
+  /* {
     label: 'Home',
     icon: 'eva:home-fill',
-  },
+  }, */
   {
     label: 'Profile',
     icon: 'eva:person-fill',
   },
-  {
+  /* {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
-  },
+  }, */
 ];
 
 // ----------------------------------------------------------------------

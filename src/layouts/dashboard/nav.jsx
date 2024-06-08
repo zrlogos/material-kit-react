@@ -83,10 +83,10 @@ export default function Nav({ openNav, onCloseNav }) {
         />
 
         <Box sx={{ textAlign: 'center' }}>
-          <Typography variant="h6">Get more?</Typography>
+          <Typography variant="h6">尺码不合适怎么办？</Typography>
 
           <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
-            From only $69
+            99vip！全年低至99可享退换无忧
           </Typography>
         </Box>
 
@@ -96,7 +96,7 @@ export default function Nav({ openNav, onCloseNav }) {
           variant="contained"
           color="inherit"
         >
-          Upgrade to Pro
+          立即开通
         </Button>
       </Stack>
     </Box>

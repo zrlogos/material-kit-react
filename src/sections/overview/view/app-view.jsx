@@ -6,14 +6,10 @@ import Typography from '@mui/material/Typography';
 
 import Iconify from 'src/components/iconify';
 
-
-import AppTasks from '../app-tasks';
-import AppNewsUpdate from '../app-news-update';
 import AppOrderTimeline from '../app-order-timeline';
 import AppCurrentVisits from '../app-current-visits';
 import AppWidgetSummary from '../app-widget-summary';
 import AppTrafficBySite from '../app-traffic-by-site';
-import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 import AppCarousel from "../app-carousel-three";
 
@@ -25,7 +21,7 @@ export default function AppView() {
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
-        你好，欢迎回来👋
+        你好，欢迎访问莆田源头工厂，全场包邮👋
       </Typography>
 
 
@@ -44,7 +40,7 @@ export default function AppView() {
         </Grid>
 
       <Grid container spacing={3}>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={6} sm={6} md={3}>
           <AppWidgetSummary
             title="周销售额"
             total={714000}
@@ -53,7 +49,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={6} sm={6} md={3}>
           <AppWidgetSummary
             title="注册用户数量"
             total={13528}
@@ -62,7 +58,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={6} sm={6} md={3}>
           <AppWidgetSummary
             title="购物订单数量"
             total={17235}
@@ -71,7 +67,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={6} sm={6} md={3}>
           <AppWidgetSummary
             title="售后退款订单数"
             total={1388}
@@ -99,26 +95,26 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppConversionRates
-            title="Conversion Rates"
-            subheader="(+43%) than last year"
+            title="本月各国销售额"
+            subheader="(+49%) 比上月增长"
             chart={{
               series: [
-                { label: 'Italy', value: 400 },
-                { label: 'Japan', value: 430 },
-                { label: 'China', value: 448 },
-                { label: 'Canada', value: 470 },
-                { label: 'France', value: 540 },
-                { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
-                { label: 'Netherlands', value: 1100 },
-                { label: 'United States', value: 1200 },
-                { label: 'United Kingdom', value: 1380 },
+                { label: '中国', value: 13416 },
+                { label: '俄罗斯', value: 5488 },
+                { label: '美国', value: 4679 },
+                { label: '英国', value: 3753 },
+                { label: '加拿大', value: 2452},
+                { label: '澳大利亚', value: 1563 },
+                { label: '新加坡', value: 583 },
+                { label: '法国', value: 100 },
+                { label: '德国', value: 120 },
+                { label: '其他国家与地区', value: 156 },
               ],
             }}
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        {/* <Grid xs={12} md={6} lg={4}>
           <AppCurrentSubject
             title="Current Subject"
             chart={{
@@ -130,9 +126,9 @@ export default function AppView() {
               ],
             }}
           />
-        </Grid>
+        </Grid> */}
 
-        <Grid xs={12} md={6} lg={8}>
+        {/* <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
             title="News Update"
             list={[...Array(5)].map((_, index) => ({
@@ -143,19 +139,19 @@ export default function AppView() {
               postedAt: faker.date.recent(),
             }))}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid xs={12} md={6} lg={4}>
           <AppOrderTimeline
-            title="Order Timeline"
+            title="我的订单"
             list={[...Array(5)].map((_, index) => ({
               id: faker.string.uuid(),
               title: [
-                '1983, orders, $4220',
-                '12 Invoices have been paid',
-                'Order #37745 from September',
-                'New order placed #XF-2356',
-                'New order placed #XF-2346',
+                'Order #37745 for yeezy 700,black,43',
+                'Order #26546 for yeezy 350,static,42.5',
+                'Order #66645 for air force 1,triple-black,43',
+                'Order #7749  for converse 1970s,black/white,43',
+                'Order #8864  for vans old skool,black,43',
               ][index],
               type: `order${index + 1}`,
               time: faker.date.past(),
@@ -165,33 +161,33 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppTrafficBySite
-            title="Traffic by Site"
+            title="分享邀请新用户下单得至高520元优惠券❀"
             list={[
               {
-                name: 'FaceBook',
-                value: 323234,
+                name: '微信',
+                value: 42342,
                 icon: <Iconify icon="eva:facebook-fill" color="#1877F2" width={32} />,
               },
               {
-                name: 'Google',
-                value: 341212,
+                name: 'QQ',
+                value: 23333,
                 icon: <Iconify icon="eva:google-fill" color="#DF3E30" width={32} />,
               },
               {
-                name: 'Linkedin',
-                value: 411213,
+                name: '微博',
+                value: 21213,
                 icon: <Iconify icon="eva:linkedin-fill" color="#006097" width={32} />,
               },
               {
-                name: 'Twitter',
-                value: 443232,
+                name: '小红书',
+                value: 42232,
                 icon: <Iconify icon="eva:twitter-fill" color="#1C9CEA" width={32} />,
               },
             ]}
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={8}>
+    {/*     <Grid xs={12} md={6} lg={8}>
           <AppTasks
             title="Tasks"
             list={[
@@ -202,7 +198,7 @@ export default function AppView() {
               { id: '5', name: 'Sprint Showcase' },
             ]}
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );

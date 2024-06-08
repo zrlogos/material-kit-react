@@ -66,7 +66,7 @@ export default function UserPage() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        selected.slice(selectedIndex + 1),
       );
     }
     setSelected(newSelected);
@@ -122,12 +122,10 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
-                  { id: '' },
+                  { id: 'name', label: '姓名' },
+                  { id: 'company', label: '邮箱' },
+                  { id: 'role', label: '角色' },
+                  { id: '', },
                 ]}
               />
               <TableBody>
@@ -138,10 +136,8 @@ export default function UserPage() {
                       key={row.id}
                       name={row.name}
                       role={row.role}
-                      status={row.status}
                       company={row.company}
                       avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
@@ -151,7 +147,6 @@ export default function UserPage() {
                   height={77}
                   emptyRows={emptyRows(page, rowsPerPage, users.length)}
                 />
-
                 {notFound && <TableNoData query={filterName} />}
               </TableBody>
             </Table>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -11,18 +10,15 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 import AddressForm from './AddressForm';
 import Info from './Info';
 import InfoMobile from './InfoMobile';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-
-
 
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -48,14 +44,24 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [activeStep, setActiveStep] = React.useState(0);
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const handleBackToDetail = () => {
+    if (location.state?.from) {
+      navigate(location.state.from);
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -88,11 +94,10 @@ export default function Checkout() {
           >
             <Button
               startIcon={<ArrowBackRoundedIcon />}
-              component="a"
-              href="/material-ui/getting-started/templates/landing-page/"
               sx={{ ml: '-8px' }}
+              onClick={handleBackToDetail}
             >
-              Back to
+              返回商品详情页面
               <img
                 src='https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg'
                 style={logoStyle}
@@ -148,11 +153,10 @@ export default function Checkout() {
             >
               <Button
                 startIcon={<ArrowBackRoundedIcon />}
-                component="a"
-                href="/material-ui/getting-started/templates/landing-page/"
                 sx={{ alignSelf: 'start' }}
+                onClick={handleBackToDetail}
               >
-                Back to
+                返回
                 <img
                   src="https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg"
                   style={logoStyle}
@@ -322,7 +326,7 @@ export default function Checkout() {
                       width: { xs: '100%', sm: 'fit-content' },
                     }}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Place order' : 'Next' }
                   </Button>
                 </Box>
               </>
@@ -330,6 +334,5 @@ export default function Checkout() {
           </Box>
         </Grid>
       </Grid></>
-
   );
 }

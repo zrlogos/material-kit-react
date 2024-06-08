@@ -7,7 +7,7 @@ export default function BlogPage() {
   return (
     <>
       <Helmet>
-        <title> Blog | Minimal UI </title>
+        <title> 分类 | 莆田商城 </title>
       </Helmet>
       <BlogView />
     </>

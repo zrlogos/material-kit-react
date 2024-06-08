@@ -8,7 +8,7 @@ export default function AppPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | Minimal UI </title>
+        <title> 主页 | 莆田商城 </title>
       </Helmet>
 
       <AppView />

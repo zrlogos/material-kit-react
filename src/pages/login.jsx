@@ -8,7 +8,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title> Login | Minimal UI </title>
+        <title> 登录 | 莆田商城 </title>
       </Helmet>
 
       <LoginView />

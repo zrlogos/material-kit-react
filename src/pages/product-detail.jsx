@@ -9,7 +9,7 @@ export default function ProductDetailPage() {
   return (
     <>
       <Helmet>
-        <title>Product Detail | Minimal UI</title>
+        <title>商品详情 | 莆田商城</title>
       </Helmet>
       <ProductDetailView />
     </>

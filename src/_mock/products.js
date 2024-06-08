@@ -60,5 +60,16 @@ export const products = [...Array(24)].map((_, index) => {
       (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
       PRODUCT_COLOR,
     status: sample(['sale', 'new', '', '']),
+    description: '这是一款高质量的产品，拥有出色的性能和时尚的设计。',
+    specifications: {
+      model: `型号 ${setIndex}`,
+      brand: '品牌名称',
+      weight: '1500g',
+      dimensions: '30 x 20 x 10 cm',
+      color: sample(PRODUCT_COLOR),
+    },
+    stock: faker.number.int({ min: 0, max: 1000 }), // 库存
+    sales: faker.number.int({ min: 0, max: 10000 }), // 销量
+    views: faker.number.int({ min: 0, max: 100000 }), // 浏览量
   };
 });

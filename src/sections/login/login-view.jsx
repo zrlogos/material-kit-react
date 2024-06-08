@@ -23,7 +23,6 @@ import useAccountStore from 'src/stores/accountStore'; // 导入 useAccountStore
 
 export default function LoginView() {
   const theme = useTheme();
-
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -19,7 +19,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 const Cart = () => {
   const [cartOpen, setCartOpen] = React.useState(false);
   const [items, setItems] = React.useState([
-    { id: 1, name: '商品 1', price: 100, quantity: 1, imageUrl: '/assets/images/products/product_1.jpg' },
+    { id: 1, name: '商品 1', price: 99, quantity: 1, imageUrl: '/assets/images/products/product_1.jpg' },
     { id: 2, name: '商品 2', price: 200, quantity: 2, imageUrl: '/assets/images/products/product_2.jpg' },
   ]);
 
@@ -66,7 +66,8 @@ const Cart = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
                       <Typography variant="h6" sx={{ mb: 1 }}>{item.name}</Typography>
-                      <Typography color="textSecondary" sx={{ mb: 1 }}>价格: {item.price} 元</Typography>
+                      <Typography variant="caption" color="textSecondary"
+                                  sx={{ mb: 1 }}>¥{item.price}</Typography>
                       <Grid container alignItems="center">
                         <IconButton size="small" onClick={() => handleQuantityChange(item.id, -1)}>
                           <RemoveIcon />

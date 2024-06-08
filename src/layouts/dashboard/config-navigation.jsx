@@ -8,32 +8,32 @@ const icon = (name) => (
 
 const navConfig = [
   {
-    title: 'dashboard',
+    title: '主页',
     path: '/dashboard',
     icon: icon('ic_analytics'),
   },
   {
-    title: 'user',
+    title: '用户',
     path: '/user',
     icon: icon('ic_user'),
   },
   {
-    title: 'product',
+    title: '产品',
     path: '/products',
     icon: icon('ic_cart'),
   },
   {
-    title: 'blog',
+    title: '分类',
     path: '/blog',
     icon: icon('ic_blog'),
   },
   {
-    title: 'login',
+    title: '登录',
     path: '/login',
     icon: icon('ic_lock'),
   },
   {
-    title: 'Not found',
+    title: '页面未响应',
     path: '/404',
     icon: icon('ic_disabled'),
   },

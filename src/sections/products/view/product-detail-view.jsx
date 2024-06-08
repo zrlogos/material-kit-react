@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { Box, Grid, Button, Container, Typography } from '@mui/material';
 
 import { products } from 'src/_mock/products';
+import useCartStore from '../../../stores/cartStore';
+import CartWidget from '../product-cart-widget';
 
 // ----------------------------------------------------------------------
 
@@ -11,11 +13,26 @@ export default function ProductDetailView() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
-
+  const cartWidgetRef = React.useRef();
   useEffect(() => {
     const foundProduct = products.find((p) => p.id === productId);
     setProduct(foundProduct);
   }, [productId]);
+  
+  
+  const { addToCart } = useCartStore();
+  const handleAddToCart = () => {
+    const item ={
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.cover,
+      quantity: 1
+    }
+    addToCart(item);
+    cartWidgetRef.current.toggle();
+  
+  }
 
   if (!product) {
     return <Typography variant="h5">Product not found</Typography>;
@@ -60,7 +77,7 @@ export default function ProductDetailView() {
               />
             ))}
           </Box>
-          <Button variant="contained" sx={{ mr: 2 }}>
+          <Button variant="contained" sx={{ mr: 2 }} onClick={handleAddToCart} >
             Add to Cart
           </Button>
           <Button variant="outlined" onClick={() => navigate('/checkout')}>
@@ -68,6 +85,7 @@ export default function ProductDetailView() {
           </Button>
         </Grid>
       </Grid>
+      <CartWidget ref={cartWidgetRef} />
     </Container>
   );
 }

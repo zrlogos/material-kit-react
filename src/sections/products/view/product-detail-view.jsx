@@ -22,7 +22,6 @@ import Logo from '../../../components/logo';
 import useCartStore from '../../../stores/cartStore';
 import CartWidget from '../product-cart-widget';
 import useCheckStore from '../../../stores/checkStore';
-import { useRouter } from '../../../routes/hooks';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +38,7 @@ export default function ProductDetailView() {
   const [expanded, setExpanded] = useState(false); // 控制购买类型折叠面板的展开状态
   const [expandedParams, setExpandedParams] = useState(false);
   const { addCheck } = useCheckStore();
-  const router = useRouter();
+
   useEffect(() => {
     const foundProduct = products.find((p) => p.id === productId);
     setProduct(foundProduct);
@@ -69,7 +68,7 @@ export default function ProductDetailView() {
         quantity: '1',
         price: product.price,
       });
-      router.push('/checkout');
+      navigate('/checkout', { state: { from: `/products/${productId}` } });
     }
   };
 

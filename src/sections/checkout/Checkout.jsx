@@ -60,6 +60,7 @@ export default function Checkout() {
     if (location.state?.from) {
       navigate(location.state.from);
     } else {
+      console.log(location.state?.from)
       navigate('/');
     }
   };

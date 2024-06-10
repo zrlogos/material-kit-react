@@ -1,39 +1,58 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import React, { useState } from 'react';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  FormControlLabel,
+  Checkbox
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { useRouter } from '../../routes/hooks';
+import { useNavigate } from 'react-router-dom';
 
+export default function Register() {
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-export default function RegisterView() {
-  const router = useRouter();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const userInfo = {
-      name: data.get('username'),
-      email: data.get('email'),
-      password: data.get('password'),
-    };
-    // 将用户信息对象转换为 JSON 字符串并存储到 localStorage 中
-    localStorage.setItem(userInfo.email.toString(), JSON.stringify(userInfo));
-    alert('注册成功');
-    router.push('/login');
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get('email');
+    const password = formData.get('password');
+    const username = formData.get('username');
 
+    if (!email || !password || !username) {
+      setError('请填写所有必填字段');
+      return;
+    }
 
+    // 从 localStorage 中获取用户列表
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const userExists = existingUsers.some(user => user.email === email);
+
+    if (userExists) {
+      setError('该电子邮件地址已被注册');
+      return;
+    }
+
+    // 创建新用户对象
+    const newUser = { name: username, email, password };
+
+    // 将新用户添加到用户列表并存储到 localStorage
+    localStorage.setItem('users', JSON.stringify([...existingUsers, newUser]));
+
+    // 将用户信息存储到 localStorage 中
+    localStorage.setItem(email, JSON.stringify(newUser));
+
+    navigate('/login');
   };
 
   return (
-
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -58,8 +77,8 @@ export default function RegisterView() {
                 name="username"
                 required
                 fullWidth
-                id="userame"
-                label="userame"
+                id="username"
+                label="Username"
                 autoFocus
               />
             </Grid>
@@ -91,6 +110,7 @@ export default function RegisterView() {
               />
             </Grid>
           </Grid>
+          {error && <Typography color="error">{error}</Typography>}
           <Button
             type="submit"
             fullWidth

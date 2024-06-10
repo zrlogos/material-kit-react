@@ -43,6 +43,7 @@ export default function LoginView() {
           photoURL: '/assets/images/avatars/avatar_25.jpg',
         };
         setAccount(account); // 更新 account 的状态
+        localStorage.setItem('loggedInUserEmail', email); // 保存当前登录用户的 email
         router.push('/dashboard');
       } else {
         alert('Invalid email or password');
@@ -51,20 +52,21 @@ export default function LoginView() {
       alert('Invalid email or password');
     }
   };
+
   const renderForm = (
     <>
       <Stack spacing={3}>
         <TextField
           name="email"
           label="Email address"
-          onChange={e => setEmail(e.target.value)} // 添加这行
+          onChange={e => setEmail(e.target.value)}
         />
 
         <TextField
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          onChange={e => setPassword(e.target.value)} // 添加这行
+          onChange={e => setPassword(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -122,7 +124,7 @@ export default function LoginView() {
             maxWidth: 420,
           }}
         >
-          <Typography variant="h4">Sign in to Minimal</Typography>
+          <Typography variant="h4">Sign in 莆田源头工厂</Typography>
 
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>

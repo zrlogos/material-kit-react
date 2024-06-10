@@ -1,94 +1,107 @@
-import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { FaClipboardList, FaMoneyBillAlt, FaTruck, FaExchangeAlt, FaMapMarkedAlt, FaHeart, FaBookmark, FaStar } from 'react-icons/fa';
-import avatar4 from '../../../public/assets/images/avatars/avatar_4.jpg';
+import React, { useState, useEffect } from 'react';
+import {
+  Container,
+  Grid,
+  Typography,
+  Avatar,
+  Box,
+  TextField,
+  Button,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const UserProfile = () => {
-  // 这里假设我们从 Redux store 或其他数据源获取用户信息
-  const user = {
-    name: 'jack',
-    avatar: avatar4,
-    points: 1000,
-    growth: 80,
-    coupons: 5,
+export default function ProfileUser() {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
+    if (loggedInUserEmail) {
+      const storedUser = JSON.parse(localStorage.getItem(loggedInUserEmail)); // 重命名为 storedUser
+      setUser(storedUser);
+    } else {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
+  const handleUpdate = () => {
+    if (!user.name || !user.email || !user.phone || !user.address) {
+      setError('请填写所有字段');
+      return;
+    }
+
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const updatedUsers = existingUsers.map(u => (u.email === user.email ? user : u));
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+    localStorage.setItem(user.email, JSON.stringify(user));
+    localStorage.setItem('loggedInUserEmail', user.email);
+    setError('');
   };
 
-  const handleClick = (action) => {
-    // 根据不同的 action 执行相应的操作
-    console.log(`执行 ${action} 操作`);
-  };
+  if (!user) {
+    return <Typography>Loading...</Typography>;
+  }
 
   return (
-    <div>
-      <div className="user-profile" style={{ backgroundColor: '#f5f5f5', padding: '20px' }}>
-        <div className="profile-header" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={user.avatar} alt={user.name} style={{ borderRadius: '50%', width: '60px', height: '60px', marginRight: '16px' }} />
-          <div>
-            <h2>{user.name}</h2>
-            <p>{user.email}</p>
-          </div>
-        </div>
-        <div className="profile-stats" style={{ display: 'flex', justifyContent: 'space-around', marginTop: '16px' }}>
-          <div>
-            <h3>{user.points}</h3>
-            <p>积分</p>
-          </div>
-          <div>
-            <h3>{user.growth}%</h3>
-            <p>成长值</p>
-          </div>
-          <div>
-            <h3>{user.coupons}</h3>
-            <p>优惠券</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="profile-orders-status" style={{ backgroundColor: '#f0f0f0', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-          <button type="button" onClick={() => handleClick('查看全部订单')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <FaClipboardList size={32} />
-            <span>全部订单</span>
-          </button>
-          <button type="button" onClick={() => handleClick('查看待付款订单')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <FaMoneyBillAlt size={32} />
-            <span>待付款</span>
-          </button>
-          <button type="button" onClick={() => handleClick('查看待收货订单')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <FaTruck size={32} />
-            <span>待收货</span>
-          </button>
-          <button type="button" onClick={() => handleClick('查看退款/售后订单')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <FaExchangeAlt size={32} />
-            <span>退款/售后</span>
-          </button>
-        </div>
-      </div>
-
-<div className="profile-other-functions" style={{ backgroundColor: '#e8e8e8', padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-  <button type="button" onClick={() => handleClick('地址管理')} style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '12px 0', backgroundColor: 'white', borderRadius: '4px' }}>
-    <FaMapMarkedAlt size={24} />
-    <span>地址管理</span>
-  </button>
-  <button type="button" onClick={() => handleClick('我的足迹')} style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '12px 0', backgroundColor: 'white', borderRadius: '4px' }}>
-    <FaHeart size={24} />
-    <span>我的足迹</span>
-  </button>
-  <button type="button" onClick={() => handleClick('我的关注')} style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '12px 0', backgroundColor: 'white', borderRadius: '4px' }}>
-    <FaBookmark size={24} />
-    <span>我的关注</span>
-  </button>
-  <button type="button" onClick={() => handleClick('我的收藏')} style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '12px 0', backgroundColor: 'white', borderRadius: '4px' }}>
-    <FaBookmark size={24} />
-    <span>我的收藏</span>
-  </button>
-  <button type="button" onClick={() => handleClick('我的评价')} style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '12px 0', backgroundColor: 'white', borderRadius: '4px' }}>
-    <FaStar size={24} />
-    <span>我的评价</span>
-  </button>
-</div>
-    </div>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        用户资料
+      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={4}>
+          <Avatar alt={user.name} src={user.avatar || '/assets/images/avatars/avatar_default.jpg'} sx={{ width: 128, height: 128 }} />
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Box component="form" noValidate autoComplete="off">
+            <TextField
+              fullWidth
+              margin="normal"
+              id="name"
+              label="姓名"
+              name="name"
+              value={user.name}
+              onChange={(e) => setUser({ ...user, name: e.target.value })}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              id="email"
+              label="电子邮件"
+              name="email"
+              value={user.email}
+              disabled
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              id="phone"
+              label="电话"
+              name="phone"
+              value={user.phone || ''}
+              onChange={(e) => setUser({ ...user, phone: e.target.value })}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              id="address"
+              label="地址"
+              name="address"
+              value={user.address || ''}
+              onChange={(e) => setUser({ ...user, address: e.target.value })}
+            />
+            {error && <Typography color="error">{error}</Typography>}
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ mt: 3 }}
+              onClick={handleUpdate}
+            >
+              更新资料
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+    </Container>
   );
-};
-
-export default UserProfile;
+}

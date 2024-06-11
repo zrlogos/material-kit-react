@@ -13,18 +13,13 @@ const navConfig = [
     icon: icon('ic_analytics'),
   },
   {
-    title: '用户',
-    path: '/user',
-    icon: icon('ic_user'),
-  },
-  {
     title: '产品',
     path: '/products',
     icon: icon('ic_cart'),
   },
   {
     title: '分类',
-    path: '/blog',
+    path: '/categories',
     icon: icon('ic_blog'),
   },
   {
